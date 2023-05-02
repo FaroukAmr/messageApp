@@ -1,11 +1,7 @@
-#version: '3'
-#services:
-#  springboot-app:
-#    ports:
-#      - 8080:8080
-#
-#  messageapp:
-#    image: cassandra
-#    container_name: cassandra
-#    ports:
-#      - "9042:9042"
+version: '3.1'
+services:
+  messageapp:
+    image: cassandra
+    container_name: cassandra
+    ports:
+      - "9042:9042"
