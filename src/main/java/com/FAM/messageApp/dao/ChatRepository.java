@@ -1,7 +1,12 @@
 package com.FAM.messageApp.dao;
 
 import com.FAM.messageApp.model.Chat;
-import org.springframework.data.cassandra.repository.CassandraRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface ChatRepository extends CassandraRepository<Chat,Integer> {
+import java.util.Optional;
+
+public interface ChatRepository extends MongoRepository<Chat,String> {
+    Optional<Chat>  findChatById(String chatId);
+    Optional<Chat>  findChatByRepresentativeId(String representativeId);
+    Optional<Chat>  findChatByCustomerId(String customerId);
 }

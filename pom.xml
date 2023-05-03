@@ -12,15 +12,18 @@
 	<artifactId>messageApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>messageApp</name>
-	<description>Project for the message app of best buy replica</description>
+	<description>Project for the message app of BestBuy replica</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-cassandra</artifactId>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
