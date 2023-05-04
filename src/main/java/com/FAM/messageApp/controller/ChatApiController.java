@@ -17,21 +17,17 @@ public class ChatApiController {
     public List<Chat> getAllChatsByCustomerId(@PathVariable String id){
         return chatService.getAllChatsByCustomerId(id);
     }
-
     @GetMapping("/representative/{id}")
     public List<Chat> getAllChatsByRepresentativeId(@PathVariable String id){
         return chatService.getAllChatsByRepresentativeId(id);
     }
-
     @PostMapping
     public void createChat(@RequestBody Chat chat){
         chatService.createChat(chat);
     }
-
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id){
         chatService.deleteChatById(id);
 
     }
-
 }

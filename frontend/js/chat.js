@@ -36,7 +36,7 @@ function subscribeToChatSession(chatID) {
             render(data.message, data.fromUser);
         } else {
             newMessages.set(data.fromUser, data.message);
-            $('#userNameAppender_' + data.fromUser).append('<span id="newMessage_' + data.fromLogin + '" style="color: red">+1</span>');
+            $('#userNameAppender_' + data.fromUser).append('<span id="newMessage_' + data.fromLogin + '" style="color: #ffffff">+1</span>');
         }
 
     });
@@ -56,20 +56,29 @@ function sendMsg(from, text) {
 function registration() {
     let userName = document.getElementById("userName").value;
 
-    $.get(url + "/registration/" + userName, function (response) {
-        connectToChat(userName);
-        userNameSaved = userName;
-        localStorage.setItem('userName', userName);
-        console.log(response);
-        const username = userName;
-        document.cookie = userName;
-
-    }).fail(function (error) {
-        if (error.status === 400) {
-            alert("Login is already busy!")
+    $.ajax({
+        url: url + "/registration/" + userName,
+        type: "GET",
+        xhrFields: {
+            withCredentials: false // set to false to avoid CORS error
+        },
+        success: function (response) {
+            connectToChat(userName);
+            userNameSaved = userName;
+            localStorage.setItem('userName', userName);
+            console.log(response);
+            const username = userName;
+            document.cookie = userName;
+        },
+        error: function (error) {
+            if (error.status === 400) {
+                alert("Login is already busy!");
+            }
         }
-    })
+    });
+
 }
+
 
 function intChat() {
     let userName = document.getElementById("userName").value;

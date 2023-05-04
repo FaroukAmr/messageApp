@@ -12,18 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ChatSessionController {
 
     @Autowired
     private ChatSessionService chatSessionService;
 
     @GetMapping("/chatSessions")
+    @CrossOrigin(originPatterns = "*", allowedHeaders = "*")
     public List<ChatSession> getAllChatSessions() {
         return new ArrayList<>(chatSessionService.getAllChatSessions());
     }
 
     @GetMapping("/chatSessions/{userName}")
+    @CrossOrigin(originPatterns = "*", allowedHeaders = "*")
     public List<ChatSession> getChatSessionsOfUser(@PathVariable String userName) {
         //have to authenticate first
         return new ArrayList<>(chatSessionService.getChatSessionsOfUser(userName));

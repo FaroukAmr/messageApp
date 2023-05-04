@@ -25,6 +25,7 @@ public class IntiateChatController {
 
 
     @PostMapping(path = "/intiateChat")
+    @CrossOrigin(originPatterns = "*", allowedHeaders = "*")
     public ResponseEntity<String> intiateChat(@RequestBody IntiateChatRequest requestBody, HttpServletRequest request)
     {
         System.out.println("handling intiate chat request: " );

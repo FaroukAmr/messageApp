@@ -16,7 +16,6 @@ public class MessageApiController {
     public List<Message> getMessageByChatId(@PathVariable String chatId){
         return messageService.getAllMessagesForChat(chatId);
     }
-
     @PostMapping
     public void postMessage(@RequestBody Message message){
         messageService.createNewMessage(message);

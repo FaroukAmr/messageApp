@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Set;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(originPatterns = "*", allowedHeaders = "*")
 public class UsersController {
-
     @GetMapping("/registration/{userName}")
+    @CrossOrigin(originPatterns = "*", allowedHeaders = "*")
     public ResponseEntity<Void> register(@PathVariable String userName, HttpServletResponse response) {
         System.out.println("handling register user request: " + userName);
 
