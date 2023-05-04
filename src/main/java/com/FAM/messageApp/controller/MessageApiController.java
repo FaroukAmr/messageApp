@@ -21,4 +21,8 @@ public class MessageApiController {
     public void postMessage(@RequestBody Message message){
         messageService.createNewMessage(message);
     }
+    @DeleteMapping("/{chatId}")
+    public void deleteMessages(@PathVariable String chatId){
+        messageService.deleteMessagesByChatId(chatId);
+    }
 }

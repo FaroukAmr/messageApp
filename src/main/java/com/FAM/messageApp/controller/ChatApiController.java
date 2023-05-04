@@ -27,4 +27,11 @@ public class ChatApiController {
     public void createChat(@RequestBody Chat chat){
         chatService.createChat(chat);
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id){
+        chatService.deleteChatById(id);
+
+    }
+
 }

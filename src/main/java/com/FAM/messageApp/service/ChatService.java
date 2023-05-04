@@ -32,4 +32,8 @@ public class ChatService {
         }
         throw new IllegalStateException("Not found");
     }
+
+    public void deleteChatById(String id){
+        chatRepository.deleteChatById(id);
+    }
 }

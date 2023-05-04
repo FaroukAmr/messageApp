@@ -22,8 +22,10 @@ public class MessageService {
     }
 
     public void createNewMessage(Message message){
-        System.out.println(message);
         messageRepository.save(message);
     }
 
+    public void deleteMessagesByChatId(String chatId){
+        messageRepository.deleteMessagesByChatId(chatId);
+    }
 }
