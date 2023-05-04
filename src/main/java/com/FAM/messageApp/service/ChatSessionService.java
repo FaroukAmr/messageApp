@@ -5,12 +5,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-
 @Service
 public class ChatSessionService {
 
     private Map<String, ChatSession> sessionMap ;
-
 
     // Make the constructor private to prevent instantiation from outside
     private ChatSessionService() {
@@ -31,7 +29,6 @@ public class ChatSessionService {
                 retList.add(chatSession);
             }
         }
-
         return retList;
     }
 
@@ -63,5 +60,4 @@ public class ChatSessionService {
     public ArrayList<ChatSession> getAllChatSessions() {
         return new ArrayList<>(sessionMap.values());
     }
-
 }
