@@ -13,14 +13,16 @@ public class Chat {
     private String customerId;
     private String representativeId;
     private String title;
-    private LocalDateTime created;
     private boolean active;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public Chat(String customerId, String representativeId, String title, LocalDateTime created) {
+    public Chat(String customerId, String representativeId, String title, boolean active) {
         this.customerId = customerId;
         this.representativeId = representativeId;
         this.title = title;
-        this.created = created;
-        this.active=true;
+        this.active = active;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 }
