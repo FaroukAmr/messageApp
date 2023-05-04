@@ -1,5 +1,6 @@
-package com.FAM.messageApp.chat.model;
+package com.FAM.messageApp.service;
 
+import com.FAM.messageApp.model.ChatSession;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -8,7 +9,7 @@ import java.util.*;
 @Service
 public class ChatSessionService {
 
-    private Map<String,ChatSession> sessionMap ;
+    private Map<String, ChatSession> sessionMap ;
 
 
     // Make the constructor private to prevent instantiation from outside

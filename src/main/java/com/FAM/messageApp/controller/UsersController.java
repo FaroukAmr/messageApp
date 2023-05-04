@@ -1,6 +1,6 @@
-package com.FAM.messageApp.chat.controller;
+package com.FAM.messageApp.controller;
 
-import com.FAM.messageApp.chat.storage.UserStorage;
+import com.FAM.messageApp.storage.UserStorage;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

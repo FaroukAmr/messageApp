@@ -1,4 +1,4 @@
-package com.FAM.messageApp.chat.configuration;
+package com.FAM.messageApp.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

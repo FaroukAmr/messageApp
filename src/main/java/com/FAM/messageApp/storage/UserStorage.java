@@ -1,4 +1,4 @@
-package com.FAM.messageApp.chat.storage;
+package com.FAM.messageApp.storage;
 
 import java.util.HashSet;
 import java.util.Set;

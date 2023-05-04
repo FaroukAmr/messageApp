@@ -1,4 +1,4 @@
-package com.FAM.messageApp.chat.model;
+package com.FAM.messageApp.model;
 
 public class ChatSession {
     private String chatId;

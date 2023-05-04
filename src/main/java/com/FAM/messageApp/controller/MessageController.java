@@ -1,8 +1,8 @@
-package com.FAM.messageApp.chat.controller;
+package com.FAM.messageApp.controller;
 
-import com.FAM.messageApp.chat.model.ChatSession;
-import com.FAM.messageApp.chat.model.ChatSessionService;
-import com.FAM.messageApp.chat.model.MessageModel;
+import com.FAM.messageApp.model.ChatSession;
+import com.FAM.messageApp.service.ChatSessionService;
+import com.FAM.messageApp.model.MessageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;

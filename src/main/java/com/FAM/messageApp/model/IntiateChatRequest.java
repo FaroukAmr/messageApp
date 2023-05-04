@@ -1,4 +1,4 @@
-package com.FAM.messageApp.chat.model;
+package com.FAM.messageApp.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
