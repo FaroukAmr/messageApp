@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(originPatterns = "*", allowedHeaders = "*")
 @RequestMapping("api/message")
 @AllArgsConstructor
 public class MessageApiController {

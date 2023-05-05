@@ -14,7 +14,6 @@ import java.util.Set;
 @CrossOrigin(originPatterns = "*", allowedHeaders = "*")
 public class UsersController {
     @GetMapping("/registration/{userName}")
-    @CrossOrigin(originPatterns = "*", allowedHeaders = "*")
     public ResponseEntity<Void> register(@PathVariable String userName, HttpServletResponse response) {
         System.out.println("handling register user request: " + userName);
 

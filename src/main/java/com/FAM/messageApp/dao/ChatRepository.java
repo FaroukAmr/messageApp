@@ -10,5 +10,5 @@ public interface ChatRepository extends MongoRepository<Chat,String> {
     Optional<List<Chat>> findChatByRepresentativeId(String representativeId);
     Optional<List<Chat>> findChatByCustomerId(String customerId);
     void deleteChatById(String id);
-    void deleteChatByCustomerId(String customerId);
+    void deleteChatsByCustomerId(String customerId);
 }

@@ -28,4 +28,5 @@ public class MessageService {
     public void deleteMessagesByChatId(String chatId){
         messageRepository.deleteMessagesByChatId(chatId);
     }
+
 }

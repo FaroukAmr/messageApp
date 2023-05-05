@@ -36,4 +36,8 @@ public class ChatService {
     public void deleteChatById(String id){
         chatRepository.deleteChatById(id);
     }
+
+    public void deleteChatByUserId(String id){
+        chatRepository.deleteChatsByCustomerId(id);
+    }
 }
