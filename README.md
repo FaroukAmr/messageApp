@@ -7,3 +7,4 @@
 5. Find representative with least chats
 6. Authorization for disabiling chats
 7. Documentations
+8. Sync threads
