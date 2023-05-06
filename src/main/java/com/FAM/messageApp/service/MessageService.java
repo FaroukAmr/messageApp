@@ -21,7 +21,7 @@ public class MessageService {
         throw new IllegalStateException("Not found");
     }
 
-    public void createNewMessage(Message message){
+    public void saveMessage(Message message){
         messageRepository.save(message);
     }
 

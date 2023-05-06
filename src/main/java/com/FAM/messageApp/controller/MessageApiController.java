@@ -19,7 +19,7 @@ public class MessageApiController {
     }
     @PostMapping
     public void postMessage(@RequestBody Message message){
-        messageService.createNewMessage(message);
+        messageService.saveMessage(message);
     }
     @DeleteMapping("/{chatId}")
     public void deleteMessages(@PathVariable String chatId){

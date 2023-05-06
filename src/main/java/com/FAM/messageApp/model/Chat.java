@@ -17,12 +17,16 @@ public class Chat {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Chat(String customerId, String representativeId, String title, boolean active) {
+    public Chat(String customerId, String representativeId) {
         this.customerId = customerId;
         this.representativeId = representativeId;
-        this.title = title;
-        this.active = active;
+        this.title = "title";
+        this.active = true;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public boolean containsUserId(String id){
+        return customerId.equals(id) || representativeId.equals(id);
     }
 }

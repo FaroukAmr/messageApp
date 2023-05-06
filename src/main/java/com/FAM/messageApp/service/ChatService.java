@@ -17,6 +17,27 @@ public class ChatService {
         chatRepository.save(chat);
     }
 
+    public Chat createChat(String customerId, String representativeId){
+        Chat chat = new Chat(customerId,representativeId);
+        return chatRepository.save(chat);
+    }
+
+    public Chat getChatById(String chatId){
+        Optional<Chat> chat = chatRepository.findChatById(chatId);
+        if(chat.isPresent()){
+            return chat.get();
+        }
+        throw new IllegalStateException("Not found");
+    }
+
+    public List<Chat> getAllChatsByUserId(String id){
+        Optional<List<Chat>> optionalChat = chatRepository.findChatByCustomerIdOrRepresentativeId(id,id);
+        if (optionalChat.isPresent()){
+            return optionalChat.get();
+        }
+        throw new IllegalStateException("Not found");
+
+    }
     public List<Chat> getAllChatsByCustomerId(String id) {
         Optional<List<Chat>> optionalChat = chatRepository.findChatByCustomerId(id);
         if (optionalChat.isPresent()){
@@ -39,5 +60,11 @@ public class ChatService {
 
     public void deleteChatByUserId(String id){
         chatRepository.deleteChatsByCustomerId(id);
+    }
+
+    public void disableChatById(String chatId) {
+        Chat chat = getChatById(chatId);
+        chat.setActive(false);
+        chatRepository.save(chat);
     }
 }

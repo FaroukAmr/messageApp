@@ -1,7 +1,7 @@
 package com.FAM.messageApp.controller;
 
-import com.FAM.messageApp.model.ChatSession;
-import com.FAM.messageApp.service.ChatSessionService;
+import com.FAM.messageApp.model.Chat;
+import com.FAM.messageApp.service.ChatService;
 import com.FAM.messageApp.model.IntiateChatRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class IntiateChatController {
+public class InitiateChatController {
 
     @Autowired
-    private ChatSessionService chatSessionService;
+    private ChatService chatSessionService;
 
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
 
-    @PostMapping(path = "/intiateChat")
+    @PostMapping(path = "/initiateChat")
     public ResponseEntity<String> intiateChat(@RequestBody IntiateChatRequest requestBody, HttpServletRequest request)
     {
         System.out.println("handling intiate chat request: " );
@@ -38,14 +38,14 @@ public class IntiateChatController {
         String matchedUser = findUser();
 
         //Here We should create the chat session
-        ChatSession chatSession;
+        Chat chatSession;
         try {
-            chatSession= chatSessionService.createChatSession(userName,matchedUser);
-            System.out.println("Chat session created " + chatSession.getChatId());
-            System.out.println(chatSessionService.findByChatId(chatSession.getChatId()));
-            //we send to the matched user a message so they subscribe to the chatsession
-            messagingTemplate.convertAndSend("/topic/user/" + matchedUser, chatSession.getChatId());
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(chatSession.getChatId());
+            chatSession= chatSessionService.createChat(userName,matchedUser);
+            System.out.println("Chat session created " + chatSession.getId());
+            System.out.println(chatSessionService.getChatById(chatSession.getId()));
+            //we send to the matched user a message, so they subscribe to the chatsession
+            messagingTemplate.convertAndSend("/topic/user/" + matchedUser, chatSession.getId());
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(chatSession.getId());
         }
         catch (Exception e)
         {
@@ -55,7 +55,6 @@ public class IntiateChatController {
     }
 
     private String findUser() {
-
         return "Mohamed";
     }
 }

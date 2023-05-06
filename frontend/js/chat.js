@@ -48,8 +48,9 @@ function sendMsg(from, text) {
         stompClient = Stomp.over(socket);
     }
     stompClient.send("/app/chat/" + selectedChatId, {}, JSON.stringify({
-        fromUser: from,
-        message: text
+        senderId: from,
+        content: text,
+        chatId: selectedChatId,
     }));
 }
 
@@ -84,12 +85,12 @@ function intChat() {
     let userName = document.getElementById("userName").value;
     console.log("Sending int chat");
     $.ajax({
-        url: url + "/intiateChat",
+        url: url + "/initiateChat",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify({ userName: userName }),
         success: function (response) {
-            console.log("The chat intiated " + response);
+            console.log("The chat initiated " + response);
             subscribeToChatSession(response);
         },
         error: function (error) {
@@ -118,16 +119,16 @@ function fetchAll() {
     // let userName = document.cookie;
 
     console.log(userName);
-    $.get(url + "/chatSessions", function (response) {
+    $.get(url + "/api/chat/user/" + userNameSaved, function (response) {
         let sessions = response;
         console.log(sessions);
         let sessionsTemplateHTML = "";
         for (let i = 0; i < sessions.length; i++) {
             let chatSession = sessions[i];
-            let user1 = chatSession.user1;
-            let user2 = chatSession.user2;
-            let userToRender = user1 == userNameSaved ? user2 : user1;
-            let chatId = chatSession.chatId;
+            let user1 = chatSession.customerId;
+            let user2 = chatSession.representativeId;
+            let userToRender = user1 === userNameSaved ? user2 : user1;
+            let chatId = chatSession.id;
             sessionsTemplateHTML = sessionsTemplateHTML + '<a href="#" onclick="selectUser(\'' + userToRender + '\', \'' + chatId + '\')"><li class="clearfix">\n' +
                 '                <div class="about">\n' +
                 '                    <div id="userNameAppender_' + userToRender + '" class="name">' + userToRender + '</div>\n' +
