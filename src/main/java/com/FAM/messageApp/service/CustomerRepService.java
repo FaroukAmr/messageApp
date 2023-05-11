@@ -1,7 +1,5 @@
 package com.FAM.messageApp.service;
 
-import com.FAM.messageApp.config.RedisConfiguration;
-import com.FAM.messageApp.dao.CustomerRepRepository;
 import com.FAM.messageApp.model.CustomerRep;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -11,24 +9,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 
-//class CustomerRepComparator implements Comparator<CustomerRep> {
-//    public int compare(CustomerRep s1, CustomerRep s2) {
-//        if (s1.getNoOfChats() < s2.getNoOfChats())
-//            return 1;
-//        return -1;
-//    }
-//}
-
-
 @AllArgsConstructor
 @NoArgsConstructor
-@Repository
 @Slf4j
 public class CustomerRepService {
     private static final String HASH_KEY = "CustomerRep";
