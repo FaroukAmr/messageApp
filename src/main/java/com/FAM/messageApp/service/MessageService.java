@@ -48,7 +48,7 @@ public class MessageService {
         List<Message> messages = hash.get(HASH_KEY,chatId);
         if(messages==null) messages = new ArrayList<Message>();
         messages.add(message);
-        hash.put("chat_cache",chatId, messages);
+        hash.put(HASH_KEY,chatId, messages);
         redisTemplate.expire(HASH_KEY + ":" + chatId, 10, TimeUnit.MINUTES);
         log.info("Message is saved to the cache");
     }
@@ -57,7 +57,7 @@ public class MessageService {
         messageRepository.deleteMessagesByChatId(chatId);
         // delete from the cache
         HashOperations<String, String, List<Message>> hash = redisTemplate.opsForHash();
-        hash.delete("message_cache", chatId);
+        hash.delete(HASH_KEY, chatId);
         log.info("messages are deleted from the cache");
     }
 
