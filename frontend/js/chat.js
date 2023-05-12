@@ -85,7 +85,7 @@ function intChat() {
     let userName = document.getElementById("userName").value;
     console.log("Sending int chat");
     $.ajax({
-        url: url + "/initiateChat",
+        url: url + "/api/chat/initiate",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify({ userName: userName }),
@@ -94,7 +94,7 @@ function intChat() {
             subscribeToChatSession(response);
         },
         error: function (error) {
-            alert(error);
+           console.log(error);
         }
     });
 
