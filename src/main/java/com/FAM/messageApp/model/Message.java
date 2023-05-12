@@ -7,14 +7,19 @@ package com.FAM.messageApp.model;
 //"chatId":"6453a4fa2ce8037eee1c4606",
 //        "senderId":"farouk",
 //        "content":"Hello how are you today"
+import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.redis.core.RedisHash;
 
 @Data
 @Document
-public class Message {
+@RedisHash("message_cache")
+public class Message implements Serializable {
     @Id
     private String id;
     private String chatId;

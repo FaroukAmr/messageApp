@@ -1,17 +1,18 @@
 package com.FAM.messageApp.service;
 
 import com.FAM.messageApp.dao.MessageRepository;
+import com.FAM.messageApp.model.CustomerRep;
 import com.FAM.messageApp.model.Message;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @AllArgsConstructor
@@ -22,18 +23,18 @@ public class MessageService {
     private static String HASH_KEY = "message_cache";
     @Autowired
     private RedisTemplate redisTemplate;
+//    private RedisTemplate<String, Object> template;
     public List<Message> getAllMessagesForChat(String chatId) {
         // look in the cache
-        HashOperations<String, String, List<Message>> hash = redisTemplate.opsForHash();
-        List<Message> messages = hash.get(HASH_KEY,chatId);
-        if(messages!=null) return messages;
+        ListOperations<String, Message> list = redisTemplate.opsForList();
+        List<Message> messages = list.range(HASH_KEY+ chatId,0 , -1);
+        if(messages!=null) return new ArrayList<>();
         Optional<List<Message>> optionalMessage = messageRepository.findMessageByChatId(chatId);
-
         if (optionalMessage.isPresent()){
             // retrieve from mongoDB and add to the cache
             messages = optionalMessage.get();
-            hash.put(HASH_KEY,chatId, messages);
-            redisTemplate.expire(HASH_KEY + ":" + chatId, 10, TimeUnit.MINUTES);
+            list.rightPushAll(HASH_KEY+chatId,messages);
+            redisTemplate.expire(HASH_KEY+":"+chatId, 1, TimeUnit.HOURS);
             log.info("messages are retrieved from the DB and added to the cache");
             return messages;
         }
@@ -44,12 +45,12 @@ public class MessageService {
         messageRepository.save(message);
         // save to the cache
         String chatId = message.getChatId();
-        HashOperations<String, String, List<Message>> hash = redisTemplate.opsForHash();
-        List<Message> messages = hash.get(HASH_KEY,chatId);
+        ListOperations<String, Message> list = redisTemplate.opsForList();
+        List<Message> messages = list.range(HASH_KEY+ chatId,0, -1);
         if(messages==null) messages = new ArrayList<Message>();
         messages.add(message);
-        hash.put(HASH_KEY,chatId, messages);
-        redisTemplate.expire(HASH_KEY + ":" + chatId, 10, TimeUnit.MINUTES);
+        list.rightPushAll(HASH_KEY+chatId, messages);
+        redisTemplate.expire(HASH_KEY + ":" + chatId, 1, TimeUnit.HOURS);
         log.info("Message is saved to the cache");
     }
 

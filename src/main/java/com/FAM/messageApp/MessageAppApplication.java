@@ -1,7 +1,5 @@
 package com.FAM.messageApp;
 
-import com.FAM.messageApp.dao.ChatRepository;
-import com.FAM.messageApp.model.Chat;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import com.FAM.messageApp.service.ChatService;
 
-import java.util.Arrays;
+
 
 @SpringBootApplication
 @CrossOrigin(originPatterns = "*", allowedHeaders = "*")

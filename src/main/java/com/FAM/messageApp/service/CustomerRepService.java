@@ -94,43 +94,4 @@ public class CustomerRepService {
         if(size!=null)
             zSetOps.removeRange(HASH_KEY, 0, size);
     }
-
-//    public CustomerRep save(CustomerRep customerRep){
-//        redisTemplate.opsForHash().put(HASH_KEY,customerRep.getId(),customerRep);
-//
-//        return customerRep;
-//    }
-//
-//    public List<CustomerRep> findAll(){
-//        List<CustomerRep> list = new ArrayList<CustomerRep>();
-//        redisTemplate.opsForHash().values(HASH_KEY).forEach( i -> {
-//            list.add((CustomerRep) i);
-//        });
-//        return list;
-//    }
-
-//    public CustomerRep findCustomerRepByID(int id){
-//        return (CustomerRep) redisTemplate.opsForHash().get(HASH_KEY,id);
-//    }
-//    public String deleteCustomerRepById(int id){
-//        redisTemplate.opsForHash().delete(HASH_KEY, id);
-//        return "Removed";
-//    }
-//    @Cacheable
-//    public CustomerRep findSuitableCustomerRep(){
-//        List<CustomerRep> customerReps = findAll();
-//        int minChats = Integer.MAX_VALUE;
-//        CustomerRep theOne = null;
-//        for(int i =0;i<customerReps.size();i++){
-//            if(customerReps.get(i).getNoOfChats()<minChats){
-//                minChats = customerReps.get(i).getNoOfChats();
-//                theOne = customerReps.get(i);
-//            }
-//        }
-//        return theOne;
-//    }
-//    public CustomerRep findPerfectCustomerRep(){
-//
-//    }
-
 }
