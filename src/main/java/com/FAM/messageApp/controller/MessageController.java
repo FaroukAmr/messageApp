@@ -23,7 +23,7 @@ public class MessageController {
 
     @Autowired
     private MessageService messageService;
-    @MessageMapping("/chat/{chatID}")
+    @MessageMapping("/ws/chat/{chatID}")
     public void sendMessage(@DestinationVariable String chatID, Message message) {
         System.out.println("handling send message: " + message + " to: " + chatID);
         //Authenticate here
@@ -31,15 +31,12 @@ public class MessageController {
         //here we check if the user can send to the chat Session
         Chat chatSession = chatSessionService.getChatById(chatID);
         boolean userIsInSession = chatSession.containsUserId(userName);
-//        boolean isExists = UserStorage.getInstance().getUsers().contains(chatID);
-        boolean isExists = true;
-        System.out.println("isExists " + isExists + "userIsInSession" + userIsInSession);
         //*****
-        if (isExists && userIsInSession) {
+        if (userIsInSession) {
             System.out.println("Sending message to the chat");
-            simpMessagingTemplate.convertAndSend("/topic/chat/" + chatID, message);
+            simpMessagingTemplate.convertAndSend("/topic/ws/chat/" + chatID, message);
         }
-        messageService.saveMessage(message);
         //save to database Here
+        messageService.saveMessage(message);
     }
 }

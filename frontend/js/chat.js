@@ -28,7 +28,7 @@ function subscribeToChatSession(chatID) {
         registration();
     }
     // chatID = 0;
-    stompClient.subscribe("/topic/chat/" + chatID, function (response) {
+    stompClient.subscribe("/topic/ws/chat/" + chatID, function (response) {
         console.log("subscribing to chat with session ID" + response);
 
         let data = JSON.parse(response.body);
@@ -47,7 +47,7 @@ function sendMsg(from, text) {
         let socket = new SockJS(url + '/chat');
         stompClient = Stomp.over(socket);
     }
-    stompClient.send("/app/chat/" + selectedChatId, {}, JSON.stringify({
+    stompClient.send("/app/ws/chat/" + selectedChatId, {}, JSON.stringify({
         senderId: from,
         content: text,
         chatId: selectedChatId,

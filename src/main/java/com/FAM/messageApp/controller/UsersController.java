@@ -17,22 +17,13 @@ public class UsersController {
     public ResponseEntity<Void> register(@PathVariable String userName, HttpServletResponse response) {
         System.out.println("handling register user request: " + userName);
 
-        // Create a new cookie
-//        Cookie myCookie = new Cookie("userName", userName);
-//        myCookie.setPath("/");
-//        myCookie.setMaxAge(3600);
-
         try {
             UserStorage.getInstance().setUser(userName);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
 
-        // Attach the cookie to the response
-//        response.addCookie(myCookie);
-
-        // Return a response
-        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/fetchAllUsers")

@@ -41,7 +41,7 @@ public class InitiateChatController {
         Chat chatSession;
         try {
             chatSession= chatSessionService.createChat(userName,matchedUser);
-            System.out.println("Chat session created " + chatSession.getId());
+            System.out.println("Chat session created " + chatSession.getId()+"  " +matchedUser);
             System.out.println(chatSessionService.getChatById(chatSession.getId()));
             //we send to the matched user a message, so they subscribe to the chatsession
             messagingTemplate.convertAndSend("/topic/user/" + matchedUser, chatSession.getId());

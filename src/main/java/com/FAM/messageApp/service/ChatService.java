@@ -2,24 +2,19 @@ package com.FAM.messageApp.service;
 
 import com.FAM.messageApp.dao.ChatRepository;
 import com.FAM.messageApp.model.Chat;
-import com.FAM.messageApp.model.Message;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.xml.datatype.Duration;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
 @Service
 public class ChatService {
-    private final ChatRepository chatRepository;
     @Autowired
+    private final ChatRepository chatRepository;
+
 
     public void createChat(Chat chat){
         chatRepository.save(chat);
