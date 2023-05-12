@@ -4,6 +4,7 @@ import com.FAM.messageApp.model.Chat;
 import com.FAM.messageApp.model.Message;
 import com.FAM.messageApp.service.ChatService;
 import com.FAM.messageApp.service.MessageService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -13,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(originPatterns = "*", allowedHeaders = "*")
-public class MessageController {
+@Slf4j
+public class MessageWebsocketController {
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
@@ -33,10 +35,14 @@ public class MessageController {
         boolean userIsInSession = chatSession.containsUserId(userName);
         //*****
         if (userIsInSession) {
-            System.out.println("Sending message to the chat");
+            log.info("Sending message from "+userName+"to chat with Id "+chatID);
             simpMessagingTemplate.convertAndSend("/topic/ws/chat/" + chatID, message);
+        }
+        else {
+            log.info("failed to send as user is not in session");
         }
         //save to database Here
         messageService.saveMessage(message);
+        log.info("saved to database");
     }
 }

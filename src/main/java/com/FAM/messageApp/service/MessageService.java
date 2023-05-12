@@ -1,7 +1,6 @@
 package com.FAM.messageApp.service;
 
 import com.FAM.messageApp.dao.MessageRepository;
-import com.FAM.messageApp.model.CustomerRep;
 import com.FAM.messageApp.model.Message;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @AllArgsConstructor
@@ -38,6 +38,7 @@ public class MessageService {
             log.info("messages are retrieved from the DB and added to the cache");
             return messages;
         }
+        log.info("message couldn't be found for chat "+chatId);
         throw new IllegalStateException("Not found");
     }
 

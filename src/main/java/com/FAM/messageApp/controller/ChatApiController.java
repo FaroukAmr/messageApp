@@ -74,8 +74,6 @@ public class ChatApiController {
         System.out.println(requestBody);
 
         String userName = requestBody.getUserName();
-        //we should authenticate the user here an that he doesn't have any active sessions
-        //..
 
         //Here we should find the user that would be matched
         String matchedUser = findUser();
