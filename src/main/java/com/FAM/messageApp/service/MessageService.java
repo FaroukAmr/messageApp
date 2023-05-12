@@ -32,9 +32,9 @@ public class MessageService {
         if (optionalMessage.isPresent()){
             // retrieve from mongoDB and add to the cache
             messages = optionalMessage.get();
-            hash.put("chat_cache",chatId, messages);
+            hash.put(HASH_KEY,chatId, messages);
             redisTemplate.expire(HASH_KEY + ":" + chatId, 10, TimeUnit.MINUTES);
-            log.info("messages are retrived from the DB and added to the cache");
+            log.info("messages are retrieved from the DB and added to the cache");
             return messages;
         }
         throw new IllegalStateException("Not found");

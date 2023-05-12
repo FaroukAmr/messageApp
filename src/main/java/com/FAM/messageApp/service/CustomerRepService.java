@@ -4,6 +4,7 @@ import com.FAM.messageApp.model.CustomerRep;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ import java.util.Set;
 public class CustomerRepService {
     private static final String HASH_KEY = "customer_rep_queue";
 
-//    @Autowired
-    private RedisTemplate<String, CustomerRep> redisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
 

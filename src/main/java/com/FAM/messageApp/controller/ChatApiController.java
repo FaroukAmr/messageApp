@@ -3,6 +3,7 @@ package com.FAM.messageApp.controller;
 import com.FAM.messageApp.model.Chat;
 import com.FAM.messageApp.model.IntiateChatRequest;
 import com.FAM.messageApp.service.ChatService;
+import com.FAM.messageApp.service.CustomerRepService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class ChatApiController {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-
+    @Autowired
+    private CustomerRepService customerRepService;
 
     @GetMapping("/{chatId}")
     public Chat getAllChatsByChId(@PathVariable String chatId){
@@ -96,7 +98,7 @@ public class ChatApiController {
     }
 
     private String findUser() {
-        return "Mohamed";
+        return customerRepService.findCustomerRep().getUsername();
     }
 
 }

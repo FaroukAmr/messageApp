@@ -73,7 +73,7 @@ function registration() {
         },
         error: function (error) {
             if (error.status === 400) {
-                alert("Login is already busy!");
+                console.log("Login is already busy!");
             }
         }
     });
