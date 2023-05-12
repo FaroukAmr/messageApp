@@ -19,7 +19,6 @@ import java.util.Optional;
 @Service
 public class ChatService {
     private final ChatRepository chatRepository;
-    @Autowired
 
     public void createChat(Chat chat){
         chatRepository.save(chat);

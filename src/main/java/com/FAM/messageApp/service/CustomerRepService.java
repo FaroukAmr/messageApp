@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -14,11 +16,12 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Slf4j
+@Service
 public class CustomerRepService {
     private static final String HASH_KEY = "customer_rep_queue";
 
     @Autowired
-    private RedisTemplate<String, CustomerRep> redisTemplate;
+    private RedisTemplate redisTemplate;
 
 
 
