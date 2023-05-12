@@ -1,6 +1,7 @@
 package com.FAM.messageApp.controller;
 
 import com.FAM.messageApp.model.Chat;
+import com.FAM.messageApp.model.CustomerRep;
 import com.FAM.messageApp.model.IntiateChatRequest;
 import com.FAM.messageApp.service.ChatService;
 import com.FAM.messageApp.service.CustomerRepService;
@@ -76,11 +77,11 @@ public class ChatApiController {
         String userName = requestBody.getUserName();
 
         //Here we should find the user that would be matched
-        String matchedUser = findUser();
 
         //Here We should create the chat session
         Chat chatSession;
         try {
+            String matchedUser = findUser();
             chatSession= chatService.createChat(userName,matchedUser);
             System.out.println("Chat session created " + chatSession.getId()+"  " +matchedUser);
             System.out.println(chatService.getChatById(chatSession.getId()));
@@ -95,8 +96,15 @@ public class ChatApiController {
         }
     }
 
-    private String findUser() {
-        return customerRepService.findCustomerRep().getUsername();
+    private String findUser() throws Exception {
+        CustomerRep customerRep = customerRepService.findCustomerRep();
+        if (customerRep!=null)
+        {
+            return customerRep.getUsername();
+        }
+        else
+            throw new Exception("No available customer service representaives");
+
     }
 
 }
